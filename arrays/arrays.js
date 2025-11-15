@@ -44,21 +44,84 @@ const twoSumAlternative = function (nums, target) {
 
 // The first k elements of nums should contain the unique numbers in sorted order. The remaining elements beyond index k - 1 can be ignored.
 
-const nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
+// const nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4];
 
-const removeDuplicates = function (nums) {
-  if (nums.length === 0) return 0;
+// const removeDuplicates = function (nums) {
+//   if (nums.length === 0) return 0;
 
-  let k = 1; // pointer for the position of the next unique element
+//   let k = 1; // pointer for the position of the next unique element
 
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] !== nums[i - 1]) {
-      nums[k] = nums[i]; // place unique element
-      k++;
+//   for (let i = 1; i < nums.length; i++) {
+//     if (nums[i] !== nums[i - 1]) {
+//       nums[k] = nums[i]; // place unique element
+//       k++;
+//     }
+//   }
+
+//   return k;
+// };
+
+// console.log(removeDuplicates(nums));
+
+// Task 03
+
+// Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
+
+// Consider the number of elements in nums which are not equal to val be k, to get accepted, you need to do the following things:
+
+// Change the array nums such that the first k elements of nums contain the elements which are not equal to val. The remaining elements of nums are not important as well as the size of nums.
+// Return k.
+
+// const nums = [3, 2, 2, 3];
+
+// const val = 3;
+
+// const removeElement = function (nums, val) {
+//   for (let i = 0; i < nums.length; i++) {
+//     console.log(nums[i]);
+//     if (nums[i] === val) {
+//       nums.splice(i, 1);
+//       i--;
+//     }
+//   }
+//   return nums.length;
+// };
+
+// console.log(removeElement(nums, val));
+
+// Task 03
+
+// Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+// You must write an algorithm with O(log n) runtime complexity.
+
+const searchInsert = function (nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  console.log("Start:", { nums, target });
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    console.log(
+      `loop → left: ${left}, right: ${right}, mid: ${mid}, nums[mid]: ${nums[mid]}`
+    );
+
+    if (nums[mid] === target) {
+      console.log("Found at index", mid);
+      return mid;
+    }
+
+    if (nums[mid] < target) {
+      console.log(`nums[mid] < target → move left to ${mid + 1}`);
+      left = mid + 1;
+    } else {
+      console.log(`nums[mid] > target → move right to ${mid - 1}`);
+      right = mid - 1;
     }
   }
 
-  return k;
+  console.log("Not found. Insert position is", left);
+  return left;
 };
 
-console.log(removeDuplicates(nums));
+console.log(searchInsert([2, 4, 7, 10, 14, 18], 6));
